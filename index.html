@@ -714,6 +714,21 @@ window.tyhjennaVastaukset = function () {
 
   alert("Vastaukset tyhjennetty.");
 };
+/* ===== Pakota aloitus kansisivulta ===== */
+
+window.addEventListener("load", function () {
+
+  // Jos sivu avataan suoraan tai reloadataan
+  if (SugarCube && SugarCube.Engine) {
+
+    // Tyhjennetään aiempi pelihistoria
+    SugarCube.State.reset();
+
+    // Siirrytään aina kansisivulle
+    SugarCube.Engine.play("Kansi");
+  }
+});
+
 
 
   </script><tw-passagedata pid="1" name="Kansi" tags="" position="650,50" size="100,100">&lt;div id=&quot;kansi-wrapper&quot; role=&quot;button&quot; tabindex=&quot;0&quot;&gt;
@@ -795,7 +810,7 @@ $(document).one(&#39;click keypress&#39;, function () {
 &lt;/div&gt;
 
 &lt;div class=&quot;choices&quot;&gt;
-  [[➡️ Seuraava sivu-&gt;Motivaatio]]
+  [[➡️ Seuraava sivu-&gt;Alku]]
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -811,21 +826,13 @@ $(document).one(&#39;click keypress&#39;, function () {
 
   &lt;!-- Teksti --&gt;
   &lt;div class=&quot;story-text&quot;&gt;
-    &lt;p&gt;Kouluaamu alkaa kuin mikä tahansa –&lt;br&gt;
-    kunnes &lt;strong&gt;Reipas-Riina&lt;/strong&gt; ei enää jaksa avata reppuaan,&lt;br&gt;
-    &lt;strong&gt;Touhu-Topi&lt;/strong&gt; unohtaa läksyt kolmatta kertaa tällä viikolla,&lt;br&gt;
-    ja &lt;strong&gt;Kaaos-Kajo&lt;/strong&gt; ilmoittaa, että “koulussa on tylsää, kun siellä ei saa rakentaa mitään.”&lt;/p&gt;
+    &lt;p&gt;Kouluaamu alkaa kuin mikä tahansa – kunnes &lt;strong&gt;Reipas-Riina&lt;/strong&gt; ei enää jaksa avata reppuaan, &lt;strong&gt;Touhu-Topi&lt;/strong&gt; unohtaa läksyt kolmatta kertaa tällä viikolla, ja &lt;strong&gt;Kaaos-Kajo&lt;/strong&gt; ilmoittaa, että “koulussa on tylsää, kun siellä ei saa rakentaa mitään.”&lt;/p&gt;
 
-    &lt;p&gt;&lt;strong&gt;Äiti Moni-Minna&lt;/strong&gt; yrittää pitää arjen kasassa, ja &lt;strong&gt;Remontti-Reiska&lt;/strong&gt; huomaa,
-    että perheestä on kadonnut koulumotivaatio.&lt;/p&gt;
-
-    &lt;p&gt;Silloin Reiska tokaisee:&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Äiti Moni-Minna&lt;/strong&gt; yrittää pitää arjen kasassa, ja &lt;strong&gt;Remontti-Reiska&lt;/strong&gt; huomaa, että perheestä on kadonnut koulumotivaatio.&lt;/p&gt;
 
     &lt;blockquote&gt;“Jos motivaatio on kadonnut, niin eihän siinä auta muu kuin etsiä se!”&lt;/blockquote&gt;
 
-    &lt;p&gt;Ja niin alkaa suurremontti – ei kotona, vaan koulumielessä:&lt;br&gt;
-    remontti, jossa korjataan reppuja, ei seiniä; asenteita, ei hanoja;&lt;br&gt;
-    ja etsitään kadonnutta kipinää, joka saa oppimisen tuntumaan taas omalta jutulta.&lt;/p&gt;
+    &lt;p&gt;Ja niin alkaa suurremontti – ei kotona, vaan koulumielessä: remontti, jossa korjataan reppuja, ei seiniä; asenteita, ei hanoja; ja etsitään kadonnutta kipinää, joka saa oppimisen tuntumaan taas omalta jutulta.&lt;/p&gt;
   &lt;/div&gt;
 
 &lt;div class=&quot;choices&quot;&gt;
@@ -1782,7 +1789,8 @@ $(document).one(&#39;click keypress&#39;, function () {
   &lt;/div&gt;
 
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="36" name="Riina C – Apusuunnitelma" tags="" position="900,650" size="100,100">&lt;h2&gt;🤝 Riinan apusuunnitelma&lt;/h2&gt;
+</tw-passagedata><tw-passagedata pid="36" name="Riina C – Apusuunnitelma" tags="" position="900,650" size="100,100">&lt;div class=&quot;task&quot;&gt;
+&lt;h2&gt;🤝 Riinan apusuunnitelma&lt;/h2&gt;
 
 &lt;div class=&quot;story-card&quot; style=&quot;display:flex; align-items:flex-start; gap:1.5rem; flex-wrap:wrap;&quot;&gt;
   &lt;img 
@@ -1808,17 +1816,7 @@ $(document).one(&#39;click keypress&#39;, function () {
   &lt;li&gt;&lt;strong&gt;Milloin?&lt;/strong&gt; Päätä tarkka hetki.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Miten pidät sen pienenä?&lt;/strong&gt; (esim. 10 minuuttia, yksi viesti, yksi konkreettinen apu)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Ennen kuin toteutat teon:&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Miltä oma motivaatiosi tuntuu juuri nyt? 🌤&lt;/li&gt;
-  &lt;li&gt;Millä yhdellä sanalla kuvailisit oloasi?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Teon jälkeen:&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Miltä sinusta tuntui?&lt;/li&gt;
-  &lt;li&gt;Huomasitko mitään muutosta omassa jaksamisessasi?&lt;/li&gt;
-  &lt;li&gt;Mitä ajattelit itsestäsi?&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/div&gt;
 &lt;blockquote&gt;
   &lt;strong&gt;💡 Riinan vinkki:&lt;/strong&gt;&lt;br&gt;
   “Motivaatio ei aina löydy tekemällä enemmän itselle. Joskus se löytyy tekemällä jotain hyvää toiselle.”
