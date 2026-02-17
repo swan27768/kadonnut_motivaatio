@@ -237,9 +237,30 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: rgba(250,247,242,0.92);
   cursor: pointer;
 }
+/* ===== Hover-verho kansikuvan päälle ===== */
+
+.cover-image {
+  position: relative;
+  display: inline-block;
+}
+
+.cover-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(250,247,242,0.85);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 1rem;
+}
+
+/* Verho näkyy vain hoverissa */
+.cover-image:hover::after {
+  opacity: 1;
+}
+
 .cover-center { animation: fadeIn 1.6s ease-in-out both; }
 .cover-center h1 {
   font-size: clamp(2.2rem, 5vw, 3.5rem);
@@ -468,7 +489,7 @@ hr { margin: var(--s1) 0; border: none; border-top: 1px solid rgba(0,0,0,0.12); 
 
 /* Kaikki peruskuvat maltillisiksi */
 .passage img {
-  max-width: 70%;       /* ei koko leveys */
+  max-width: 80%;       /* ei koko leveys */
   height: auto;
   display: block;
   margin: 0.75rem auto;
@@ -477,7 +498,7 @@ hr { margin: var(--s1) 0; border: none; border-top: 1px solid rgba(0,0,0,0.12); 
 
 /* Story-card -kuvat pienemmiksi */
 .story-card img {
-  width: 25%;
+  width: 35%;
   max-width: 180px;
 }
 
@@ -635,7 +656,91 @@ h1, h2, h3, h4 {
 .story-actions a:hover {
   transform: translateY(-1px);
 }
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Lataa vastaukset .txt -tiedostona
+/* ===== Prologin kuvat suuremmiksi ===== */
+
+.large-cover img {
+  max-width: 55%;
+  margin: 1rem auto 1.5rem auto;
+}
+
+.large-children img {
+  max-width: 50%;
+  margin: 1.5rem auto;
+}
+
+/* Lasten omat kortit suuremmiksi */
+.hero-card img {
+  width: 200px;
+  max-width: 220px;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 12px 28px rgba(91,44,111,0.2);
+}
+
+/* Mobiilissa hieman pienempi */
+@media (max-width: 600px) {
+  .large-cover img {
+    max-width: 90%;
+  }
+
+  .large-children img {
+    max-width: 85%;
+  }
+
+  .hero-card img {
+    width: 160px;
+  }
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* ======================================================
+   LUOKKATURVALLINEN SUGARCUBE-RUNKO
+   ====================================================== */
+
+Config.history.maxStates = 1;        // Ei selaushistoriaa
+Config.history.controls = false;    // Ei back/forward -ohjaimia
+Config.saves.autosave = false;      // Ei autosavea
+Config.saves.slots = 0;             // Ei tallennuspaikkoja
+Config.saves.id = "robo-safe";      // Oma tunniste
+
+/* --- Estetään selaimen Back --- */
+
+window.addEventListener("popstate", function () {
+    Engine.play("Kansi");
+});
+
+/* --- Aina puhdas käynnistys --- */
+
+$(document).on(':storyready', function () {
+
+    try {
+        Save.clear();        // Poistaa kaikki mahdolliset tallennukset
+        State.reset();       // Tyhjentää historian
+    } catch (e) {}
+
+    Engine.play("Kansi");    // Käynnistää aina kansisivulta
+});
+
+/* --- Jos iframe aktivoituu uudelleen --- */
+
+document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) {
+        Engine.play("Kansi");
+    }
+});
+
+/* --- Turvallinen poistuminen --- */
+
+window.poistuTarina = function () {
+    try {
+        Save.clear();
+        State.reset();
+    } catch (e) {}
+
+    Engine.play("Kansi");
+};
+
+
+
+// Lataa vastaukset .txt -tiedostona
 window.lataaTXT = function () {
 
   const nimi = document.getElementById("oppilasNimi")?.value || "Oppilas";
@@ -744,73 +849,84 @@ $(document).one(&#39;click keypress&#39;, function () {
 });
 &lt;&lt;/script&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="2" name="Prologi" tags="" position="650,150" size="100,100">
-&lt;div class=&quot;story-section&quot;&gt;
+</tw-passagedata><tw-passagedata pid="2" name="Prologi" tags="" position="650,150" size="100,100">&lt;div class=&quot;story-section&quot;&gt;
 
-&lt;h2&gt;🏠 Remontti-Reiskan perhe esittäytyy &lt;/h2&gt;
+&lt;h2&gt;KADONNUT MOTIVAATIO&lt;/h2&gt;
+
+&lt;!-- Perheen yhteiskuva --&gt;
+&lt;div class=&quot;story-image large-cover&quot;&gt;
+  &lt;img src=&quot;https://raw.githubusercontent.com/swan27768/Kadonnut-motivaatio/main/perhe.png&quot;
+       alt=&quot;Remontti-Reiskan perhe yhdessä&quot; /&gt;
+&lt;/div&gt;
 
 &lt;div class=&quot;profile-card parents-card&quot;&gt;
 
-  &lt;div class=&quot;avatar-group&quot;&gt;
-    &lt;img src=&quot;https://raw.githubusercontent.com/swan27768/Kadonnut-motivaatio/main/Reiska.png&quot;
-         alt=&quot;Remontti-Reiska&quot; /&gt;
-
-    &lt;img src=&quot;https://raw.githubusercontent.com/swan27768/Kadonnut-motivaatio/main/Miina_opastaa.png&quot;
-         alt=&quot;Moni-Minna&quot; /&gt;
-  &lt;/div&gt;
-
   &lt;div class=&quot;profile-text&quot;&gt;
     &lt;p&gt;
-      Remontti-Reiska tykkää rakentaa ja ratkaista pulmia.
-      Moni-Minna taas kuuntelee, kysyy ja auttaa näkemään asiat uudesta kulmasta.
-      He tietävät yhden tärkeän asian:
-      &lt;strong&gt;motivaatio ei katoa – se vain piiloutuu joskus.&lt;/strong&gt;
+      Tämä tässä on &lt;strong&gt;Remontti-Reiskan perhe&lt;/strong&gt;. &lt;br&gt;Isä, Remontti-Reiska, tykkää rakentaa, korjata ja ratkaista pulmia. Hänen mielestään melkein kaikkeen löytyy ratkaisu – kunhan vain jaksaa kokeilla uudelleen. &lt;br&gt; Äiti, Moni-Minna, taas kuuntelee, kysyy ja auttaa näkemään asiat uudesta kulmasta. Hän huomaa usein sen, mitä muut eivät heti näe: pienet ajatukset, tunteet ja oivallukset.
+    &lt;/p&gt;
+    &lt;p&gt;
+      Perheen lapset – &lt;strong&gt;Topi, Riina ja Kajo&lt;/strong&gt; – ovat kaikki erilaisia oppijoita.
+      Yksi innostuu tekemisestä, toinen rauhasta ja selkeydestä, kolmas luovuudesta ja leikistä.
+    &lt;/p&gt;
+        &lt;p&gt;
+      Mutta viime aikoina heillä on ollut yhteinen haaste: &lt;strong&gt;motivaatio ei aina löydy silloin, kun sitä eniten tarvitsisi.&lt;/strong&gt;
+    &lt;/p&gt;
+
+    &lt;div class=&quot;profile-card hero-card&quot;&gt;
+  &lt;img src=&quot;https://raw.githubusercontent.com/swan27768/Kadonnut-motivaatio/main/kadonnut_motivaatio.png&quot;
+       alt=&quot;Kajo&quot; /&gt;
+  &lt;div class=&quot;profile-text&quot;&gt;
+    &lt;p&gt;
+       Tänään heillä on sinulle pieni tehtävä...
     &lt;/p&gt;
   &lt;/div&gt;
-
 &lt;/div&gt;
-
-
-&lt;hr&gt;
+ &lt;blockquote&gt;
+      “Motivaatio on joskus kuin kadonnut ruuvi tai hukassa oleva idea. Se ei ole oikeasti poissa – se täytyy vain löytää uudelleen.”
+    &lt;/blockquote&gt;
+&lt;p style=&quot;text-align:center; font-weight:600; font-size:1.1rem;&quot;&gt;
+  &lt;em&gt;Mikä tapa toimii juuri sinulle?&lt;/em&gt;
+&lt;/p&gt;
 
 &lt;h2&gt;Topi&lt;/h2&gt;
-&lt;div class=&quot;profile-card&quot;&gt;
+&lt;div class=&quot;profile-card hero-card&quot;&gt;
   &lt;img src=&quot;https://raw.githubusercontent.com/swan27768/Kadonnut-motivaatio/main/Topi.png&quot;
        alt=&quot;Topi&quot; /&gt;
   &lt;div class=&quot;profile-text&quot;&gt;
     &lt;p&gt;
-      Topi saa energiaa tekemisestä. Kun saa kokeilla ja rakentaa,
-      kipinä syttyy usein itsestään.
+      Topi etsii motivaatiota tekemisestä.
+      Kun saa kokeilla ja rakentaa, kipinä syttyy usein itsestään.
     &lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;h2&gt;Riina&lt;/h2&gt;
-&lt;div class=&quot;profile-card&quot;&gt;
+&lt;div class=&quot;profile-card hero-card&quot;&gt;
   &lt;img src=&quot;https://raw.githubusercontent.com/swan27768/Kadonnut-motivaatio/main/Riina_taputtaa.png&quot;
        alt=&quot;Riina&quot; /&gt;
   &lt;div class=&quot;profile-text&quot;&gt;
     &lt;p&gt;
-      Riina viihtyy selkeydessä ja suunnitelmissa.
-      Kun asiat ovat järjestyksessä, motivaatio tuntuu vahvemmalta.
+      Riina etsii motivaatiota selkeydestä ja suunnitelmista.
+      Kun asiat ovat järjestyksessä, olo rauhoittuu ja voimaa löytyy.
     &lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;h2&gt;Kajo&lt;/h2&gt;
-&lt;div class=&quot;profile-card&quot;&gt;
+&lt;div class=&quot;profile-card hero-card&quot;&gt;
   &lt;img src=&quot;https://raw.githubusercontent.com/swan27768/Kadonnut-motivaatio/main/Kajo.png&quot;
        alt=&quot;Kajo&quot; /&gt;
   &lt;div class=&quot;profile-text&quot;&gt;
     &lt;p&gt;
-      Kajo rakastaa luovuutta ja kokeilua.
-      Kun oppiminen saa olla leikkiä, into herää.
+      Kajo etsii motivaatiota luovuudesta ja leikistä.
+      Kun oppiminen saa olla kokeilua, innostus herää.
     &lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;choices&quot;&gt;
-  [[➡️ Seuraava sivu-&gt;Alku]]
+  [[➡️ Lähde mukaan etsimään motivaatiota-&gt;Alku]]
 &lt;/div&gt;
 
 &lt;/div&gt;
